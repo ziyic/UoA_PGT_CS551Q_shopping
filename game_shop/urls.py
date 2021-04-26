@@ -5,13 +5,13 @@
 # @Function:
 from django.urls import path, include
 import django.contrib.auth.urls
-from . import views
+from game_shop import views
 from .views import signup
 
 urlpatterns = [
-    path('', views.index, name='product_list'),
+    path('', views.index, name='index'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('cart/', views.carts, name='carts'),
+    path('carts/', views.carts, name='carts'),
     path('signup/', views.signup, name='signup'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('customer_list', views.customer_list, name='customer_list'),

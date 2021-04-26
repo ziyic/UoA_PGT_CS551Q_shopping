@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth import login, authenticate
@@ -22,12 +23,15 @@ class TempCart:
 
 def product_list(request):
     games = Game.objects.all()
+    paginator = Paginator(games, 25)
+    page_num = request.GET.get('page')
+    page = paginator.get_page(page_num)
     cart = request.session.get('cart', [])
     request.session['cart'] = cart
     deleted = request.session.get('deleted', 'empty')
     request.session['deleted'] = 'hello'
 
-    return render(request, 'game_shop/game_list.html', {'games': games, 'deleted': deleted})
+    return render(request, 'game_shop/game_list.html', {'games': page, 'deleted': deleted})
 
 
 def get_cart(request):
@@ -174,5 +178,5 @@ def purchase(request):
 
 
 def index(request):
-    title = 'Global Fire Emissions'
+    title = 'Game shop'
     return render(request, 'game_shop/index.html', {'title': title})

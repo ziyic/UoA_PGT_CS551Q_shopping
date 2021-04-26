@@ -1,1 +1,12 @@
 {#TODO: complate this page#}
+{% extends 'game_shop/base.html' %}
+{% block content %}
+    <h1 style="text-align:center;">Game Shop > Customer Details</h1>
+
+    <p>Customer:
+      This is {{ user.last_name }} {{ user.first_name }}who lives at
+      {{user.customer.address}}. You can reach them at {{ user.email }}
+   </p>
+  <p>Modify the method to also supply the customer's orders</p>
+
+    {% endblock %}
