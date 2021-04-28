@@ -1,12 +1,27 @@
 {#TODO: complate this page#}
   {% extends 'game_shop/base.html' %}
   {% block content %}
-    <h1>Order List</h1>
+    <h1 style="text-align:center;">Order List</h1>
+    <div>
+        <table>
+            <tr>
+                <th>Order ID</th>
+                <th>Create date</th>
+            </tr>
 
-    {% for order in orders %}
-    <p>This is order <b> <a href="{% url 'order_detail' id=order.id %}">{{order.id }}</a></b> for
-       {{order.customer.id}}. The order was placed on: {{ order.created_date }}
-    </p>
-    {% endfor %}
-
-    {% endblock %}
+            {% for order in orders %}
+                {% if user.is_staff %}
+                    <tr>
+                        <td><a href="{% url 'order_detail' id=order.id %}">{{order.id }}</a></td>
+                        <td>{{ order.created_date }}</td>
+                    </tr>
+                {% elif order.customer.user.id == user.id %}
+                    <tr>
+                        <td><a href="{% url 'order_detail' id=order.id %}">{{order.id }}</a></td>
+                        <td>{{ order.created_date }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+  {% endblock %}

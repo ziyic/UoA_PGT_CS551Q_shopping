@@ -1,18 +1,39 @@
 {#TODO: complate this page#}
 {% extends 'game_shop/base.html' %}
 {% block content %}
-    <h1>Game Shop: Order Details</h1>
-
-    <p>Order:
-      This is order {{ order.id }} for
-      {{user.first_name}} {{user.last_name}}. The order was placed on: {{ order.created_date }}
-   </p>
-  <p>The order includes these items:</p>
-  {% for line_item in line_items %}
-  <p>
-   Quantity: {{ line_item.quantity}}  Item: {{ line_item.product }}
-  </p>
-
-  {% endfor %}
+    <h1 style="text-align:center;">Game Shop: Order Details</h1>
+    <div>
+    <p>Order:#order.id </p>
+    <table>
+        <tr>
+            <th>Username</th>
+            <td>{{ customer.username }}</td>
+        </tr>
+        <tr>
+            <th>e - mail</th>
+            <td>{{ customer.email }}</td>
+        </tr>
+        <tr>
+            <th>Ship to:</th>
+            <td>{{ customer.customer.address }}</td>
+        </tr>
+        <tr>
+            <th>Created at:</th>
+            <td>{{ order.created_date }}</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+        </tr>
+        {% for line in line_items %}
+            <tr>
+                <td>{{ line.product }}</td>
+                <td>{{ line.quantity }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
 
 {% endblock %}

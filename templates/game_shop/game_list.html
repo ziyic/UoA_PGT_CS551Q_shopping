@@ -1,18 +1,18 @@
 {% extends 'game_shop/base.html' %}
 {% block content %}
-    <h1 style="text-align:center;">Product List</h1>
+    <h1 style="text-align:center;">Game List</h1>
     <p>{{ deleted }} </p>
     {% if user.is_staff %}
         <p><a href="{% url 'product_new' %}">Add a new product</a></p>
     {% endif %}
     <table style="border: thin solid black;align-self: center;margin: auto;width: auto;border-collapse: separate;border-spacing: 10px;">
         <tr>
-            <th>| Game name |</th>
-            <th>| Average playtime |</th>
-            <th>| positive_ratings |</th>
-            <th>| negative_ratings |</th>
-            <th>| Release_date |</th>
-            <th>| Price |</th>
+            <th> | Game name | </th>
+            <th> | Average playtime | </th>
+            <th> | positive_ratings | </th>
+            <th> | negative_ratings | </th>
+            <th> | Release_date | </th>
+            <th> | Price | </th>
             {% if user.is_staff %}
                 <th></th>
                 <th></th>

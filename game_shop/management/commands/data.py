@@ -47,18 +47,19 @@ class Command(BaseCommand):
 
         # create some customers
         for i in range(20):
-            first_name = fake.first_name(),
-            last_name = fake.last_name(),
-            username = first_name + last_name,
+            first_name = str(fake.first_name()).lstrip("[|'| |((").rstrip("]|'| |)"),
+            last_name = str(fake.last_name()).lstrip("[|'| |(").rstrip("]|'| |)|,"),
+            username = first_name[0] + ' ' + last_name[0],
             password = GenPassword(length=random.randint(8, 16))
             user = User.objects.create_user(
-                username=username,
-                first_name=first_name,
-                last_name=last_name,
+                username=username[0],
+                first_name=first_name[0],
+                last_name=last_name[0],
                 email=fake.ascii_free_email(),
                 password=password)
             customer = Customer.objects.get(user=user)
-            customer.address = fake.address(),
+            address = fake.address().lstrip("[|'| |(").rstrip("]|'| |)"),
+            customer.address = address[0]
             customer.save()
             print(customer.user.username, password)
 
@@ -87,6 +88,7 @@ class Command(BaseCommand):
                 quantity=random.randrange(1, 99),
             )
             cart.save()
+        print("Cart ready")
 
         # create orders from customers
         customers = Customer.objects.all()
@@ -96,6 +98,7 @@ class Command(BaseCommand):
                     customer=customer,
                 )
                 order.save()
+        print("Order.customers ready")
 
         # attach line_items to orders
         orders = Order.objects.all()

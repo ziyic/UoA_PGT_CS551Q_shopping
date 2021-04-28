@@ -1,13 +1,24 @@
 {% extends 'game_shop/base.html' %}
 {% block content %}
-    <h1 style="text-align:center;">Game Shop: Your Basket</h1>
+    <h1 style="text-align:center;">Game Shop: Your Cart</h1>
 
-<h2>You have these in your basket:</h2>
-  {% for product in products %}
-
-<p>You put {{product.quantity }} of our <b> {{ product.name }} </b> which costs {{ product.price }} in your basket.</p>
-
-   {% endfor %}
-   <a href="{% url 'purchase' %}">Purchase</a>
- {% endblock %}
+<h2 style="text-align:center;">You have these in your Cart:</h2>
+    <div>
+        <table style="border: thin solid black;align-self: center;margin: auto;width: auto;border-collapse: separate;border-spacing: 10px;">
+            <tr>
+                <th colspan="3">game</th>
+                <th>perice</th>
+                <th>quantity</th>
+            </tr>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{product.quantity }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <a href="{% url 'purchase' %}">Purchase</a>
+{% endblock %}
 {#TODO: complate this page#}

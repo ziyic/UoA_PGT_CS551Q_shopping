@@ -1,22 +1,55 @@
 {#TODO: complate this page#}
-
 {% extends 'game_shop/base.html' %}
 {% block content %}
-    <h1>Game Shop: Product Details</h1>
+    <h1 style="text-align: center">Game Shop: Product Details</h1>
 
-    <p>Product {{ product.id }}: <a href="{% url 'product_edit' id=product.id %}">Edit</a>
-      This is product {{ product.name }} which costs
-      {{product.price}}. The product was added on: {{ product.created_date }}
-   </p>
-   <div>
-        <form action="{% url 'product_buy' %}" method="post">
-        {% csrf_token %}
-        <p>Buy one for yourself</p>
-            <input type='hidden' name='id' value="{{ product.id }}">
-            <label for="quantity"></label>
-            <input type="number" name="quantity" id="quantity">
-            <input type="submit" value="Purchase">
-        </form>
-    </div>
-   <p><a href="{% url 'product_delete' id=product.id %}">Delete the product</a></p>
+    <h2 style="text-align:center;padding-right: 250px">Game:</h2>
+        <table style="border: thin solid black;align-self: center;margin: auto;width: auto;border-collapse: separate;border-spacing: 10px;">
+            <tr>
+                <th>Game Name</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Required Age</th>
+                <td>{{ product.Required_age }}</td>
+            </tr>
+            <tr>
+                <th>Release Date</th>
+                <td>{{ product.Release_date }}</td>
+            </tr>
+            <tr>
+                <th>Average Playtime</th>
+                <td>{{ product.average_playtime }}</td>
+            </tr>
+            <tr>
+                <th>Positive Ratings</th>
+                <td>{{ product.positive_ratings }}</td>
+            </tr>
+            <tr>
+                <th>Negative Ratings</th>
+                <td>{{ product.negative_ratings }}</td>
+            </tr>
+            <tr>
+                <th>Reputation</th>
+                <td style="color: {{ colour }}">{{ reputation }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <form action="{% url 'product_buy' %}" method="post">
+                        {% csrf_token %}
+                            <input type='hidden' name='id' value="{{ product.id }}">
+                            <label for="quantity"></label>
+                            <input type="number" name="quantity" id="quantity">
+                            <input type="submit" value="Purchase">
+                         </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <a href="{% url 'product_delete' id=product.id %}">Delete the product</a>
+                </td>
+            </tr>
+        </table>
     {% endblock %}

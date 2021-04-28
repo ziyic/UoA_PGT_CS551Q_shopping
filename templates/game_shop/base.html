@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-gb">
 <head>
     <meta charset="UTF-8">
     <title>Game Shop</title>
@@ -20,11 +20,12 @@
 
             {% else %}
                 <a href = "{% url 'product_list' %}">Products</a> |
-                <a href = "{% url 'carts' %}">cart</a>
+                <a href = "{% url 'order_list' %}">Orders</a> |
+                <a href = "{% url 'carts' %}">Cart</a>
 
             {% endif %}
         </div>
-        <div style=";width:100px;height:100px;display:inline;float: right ">
+        <div style=";width:100px;height:100px;display:inline-block;float: right ">
             {% if user.is_authenticated %}
                 Hello {{ user.username }}
                 <a href = "{% url 'logout' %}">Log Out</a>
@@ -35,15 +36,16 @@
             {% endif %}
         </div>
     </header>
-    <div id="body">
+
+    <div id="body" style="padding-bottom: 5%">
         {% block content %}
         {% endblock %}
     </div>
 
     <footer>
-        <center style="align-content: center">
+        <p style="text-align:center;">
             © Ziyi Cao - University of Aberdeen 2021
-        </center>
+        </p>
     </footer>
 </body>
 </html>

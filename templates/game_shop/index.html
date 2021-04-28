@@ -1,13 +1,23 @@
   {% extends 'game_shop/base.html' %}
   {% block content %}
-    <div style="padding: 15% 20%">
-        <h1 style="text-align:center; font-size: 20pt">Game Shop</h1>
+    <div style="padding: 15% 10%">
+        <h1 style="text-align:center; font-size: 20pt;padding-bottom: 20px">Game Shop</h1>
         <p style="text-align:center;">
             Game Shop is a large distributor of video games, featuring some of the best-selling games on Steam
         </p>
 
-        <p style="text-align:center;">
+        <p style="text-align:center;padding-bottom: 10px">
             We can provide users with valid Steam activation codes at a more affordable price.
         </p>
+        <div style="align-self: center;margin: auto;width: auto; text-align: center">
+            <form action={% url 'search' %}>
+                <p>Search what you want</p>
+                <div >
+                <label for="searchbar"></label>
+                <input type="search" id="searchbar" name="searchbar">
+                <input type="submit" value="Search">
+                </div>
+            </form>
+        </div>
     </div>
   {% endblock %}

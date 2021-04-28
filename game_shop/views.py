@@ -63,7 +63,7 @@ def signup(request):
         user = authenticate(username=username, password=password)
         login(request, user)
         return redirect('/')
-    return render(request, 'authority/signup.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form})
 
 
 def dashboard(request):
@@ -76,12 +76,12 @@ def dashboard(request):
 
 def customer_list(request):
     users = User.objects.all()
-    return render(request, 'game_shop/customer_list.html', {'users': users})
+    return render(request, 'game_shop/customer_list.html', {'customers': users})
 
 
 def customer_detail(request, customer_id):
     user = get_object_or_404(User, id=customer_id)
-    return render(request, 'game_shop/customer_detail.html', {'user': user})
+    return render(request, 'game_shop/customer_detail.html', {'customer': user})
 
 
 def order_list(request):
@@ -89,13 +89,13 @@ def order_list(request):
     return render(request, 'game_shop/order_list.html', {'orders': orders})
 
 
-def order_detail(request):
-    order = get_object_or_404(Order, id=id)
+def order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
     customer = order.customer
     user = get_object_or_404(User, id=customer.pk)
     # TODO: modify order structure
     line_items = LineItem.objects.filter(order_id=order.id)
-    return render(request, 'game_shop/order_detail.html', {'order': order, 'user': user, 'line_items': line_items})
+    return render(request, 'game_shop/order_detail.html', {'order': order, 'customer': user, 'line_items': line_items})
 
 
 def payment(request):
@@ -127,7 +127,28 @@ def product_buy(request):
 
 def product_detail(request, id):
     game = get_object_or_404(Game, id=id)
-    return render(request, 'game_shop/product_detail.html', {'product': game})
+    overall = game.positive_ratings+game.negative_ratings
+    if game.positive_ratings/overall >= 0.95:
+        reputation = 'Overwhelmingly Positive'
+        colour = '#547DAE'
+    elif game.positive_ratings/overall >= 0.8:
+        reputation = 'Very Positive'
+        colour = '#547DAE'
+    elif game.positive_ratings/overall >= 0.7:
+        reputation = 'Mostly Positive'
+        colour = '#547DAE'
+    elif game.positive_ratings/overall >= 0.4:
+        reputation = 'Mixed'
+        colour = '#D4A24E'
+    elif game.positive_ratings / overall >= 0.2:
+        reputation = 'Mostly Negative'
+        colour = '#AA3C32'
+    else:
+        reputation = 'Very Negative'
+        colour = '#AA3C32'
+    return render(request, 'game_shop/product_detail.html', {'product': game,
+                                                             'reputation': reputation,
+                                                             'colour': colour})
 
 
 def product_new(request):
@@ -172,7 +193,7 @@ def purchase(request):
         total = 0
         for product in products:
             total += product.price * product.quantity
-        return render(request, 'game_shop/purchase.html', {'products': products, 'user': user, 'total': total})
+        return render(request, 'game_shop/purchase.html', {'products': products, 'customer': user, 'total': total})
     else:
         return redirect('login')
 
@@ -180,3 +201,13 @@ def purchase(request):
 def index(request):
     title = 'Game shop'
     return render(request, 'game_shop/index.html', {'title': title})
+
+
+def search(request):
+    result = []
+    if request.method == 'GET':
+        form_key = request.GET.get('searchbar')
+        result = Game.objects.filter(name__icontains=form_key)
+    deleted = request.session.get('deleted', 'empty')
+    request.session['deleted'] = 'hello'
+    return render(request, 'game_shop/game_list.html', {'games': result, 'delete': deleted})
