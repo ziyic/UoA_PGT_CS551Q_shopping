@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
@@ -20,6 +22,9 @@ class TempCart:
         self.price = price
         self.quantity = quantity
 
+    def __str__(self):
+        return f'id: {self.item_id}, name: {self.name}, price: {self.price}, quantity: {self.quantity}'
+
 
 def product_list(request):
     games = Game.objects.all()
@@ -35,12 +40,14 @@ def product_list(request):
 
 
 def get_cart(request):
-    basket = request.session.get('basket', [])
+    cart = request.session.get('cart', [])
     products = []
-    for item in basket:
+    for item in cart:
+        print(item[0])
         product = Game.objects.get(id=item[0])
         cart_line = TempCart(item[0], product.name, product.price, item[1])
         products.append(cart_line)
+        print(products[0])
     return products
 
 
@@ -67,9 +74,22 @@ def signup(request):
 
 
 def dashboard(request):
+    orders = Order.objects.all()
     user = request.user
+    days = []
+    for day in range(-14, 0, 1):
+        days.append(datetime.datetime.now().date() + datetime.timedelta(days=day))
+    dataset = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for order in orders:
+        print(order.created_date)
+        for i in range(len(days)):
+            if order.created_date == days[i]:
+                dataset[i] += 1
+
     if user.is_authenticated & user.is_staff:
-        return render(request, 'game_shop/dashboard.html')
+        print(days)
+        print(dataset)
+        return render(request, 'game_shop/dashboard.html', {'days': days, 'dataset': dataset})
     else:
         return redirect('accounts/login.html')
 
@@ -105,12 +125,12 @@ def payment(request):
     order.refresh_from_db()
     for game in games:
         product_item = get_object_or_404(Game, id=game.item_id)
-        cart = Cart.objects.create(product=product_item, quantity=game.quantity)
+        cart = Cart.objects.create(item=product_item, quantity=game.quantity)
         cart.refresh_from_db()
         line_item = LineItem.objects.create(quantity=game.quantity, product=product_item,
                                             cart=cart, order=order)
 
-    request.session['basket'].clear()
+    request.session['cart'].clear()
     request.session['deleted'] = 'thanks for your purchase'
     return redirect('product_list')
 
@@ -127,17 +147,17 @@ def product_buy(request):
 
 def product_detail(request, id):
     game = get_object_or_404(Game, id=id)
-    overall = game.positive_ratings+game.negative_ratings
-    if game.positive_ratings/overall >= 0.95:
+    overall = game.positive_ratings + game.negative_ratings
+    if game.positive_ratings / overall >= 0.95:
         reputation = 'Overwhelmingly Positive'
         colour = '#547DAE'
-    elif game.positive_ratings/overall >= 0.8:
+    elif game.positive_ratings / overall >= 0.8:
         reputation = 'Very Positive'
         colour = '#547DAE'
-    elif game.positive_ratings/overall >= 0.7:
+    elif game.positive_ratings / overall >= 0.7:
         reputation = 'Mostly Positive'
         colour = '#547DAE'
-    elif game.positive_ratings/overall >= 0.4:
+    elif game.positive_ratings / overall >= 0.4:
         reputation = 'Mixed'
         colour = '#D4A24E'
     elif game.positive_ratings / overall >= 0.2:

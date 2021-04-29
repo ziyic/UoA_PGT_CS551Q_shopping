@@ -1,10 +1,46 @@
 {% extends 'game_shop/base.html' %}
 {% block content %}
     <h1 style="text-align:center;">Game Shop: The Admin Dashboard</h1>
+
     <div>
-        Do something with charts based on orders, and customers. This could be orders per week/month, etc,
-        or distribution of your customers, or shops if you have those. You might also do something based on
-        most common items sold, or other details from your orders.
+        <h2 style="text-align:center; padding-top: 50px">Order quantity trend monitor</h2>
+    </div>
+
+    <div style="width:800px; height:600px;align-self: center;margin: auto;">
+        <canvas id="myChart" ></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script type= 'text/javascript'>
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: [{% for day in days %} "{{ day }}", {% endfor %}],
+
+            datasets: [{
+                label: 'Orders',
+                backgroundColor: 'rgb(240,110, 32)',
+                borderColor: 'rgb(240, 110, 32)',
+                data: {{ dataset }}
+            }]
+
+        },
+
+        // Configuration options go here
+        options: {
+            scales:{
+                yAxes:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }]
+             }
+        }
+        });
+        </script>
     </div>
 
 {% endblock %}

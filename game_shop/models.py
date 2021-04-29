@@ -75,7 +75,7 @@ class Cart(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    created_date = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateField()
 
     def __str__(self):
         return f'{self.customer},{self.created_date}'

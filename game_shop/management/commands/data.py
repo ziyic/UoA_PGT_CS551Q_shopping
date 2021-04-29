@@ -10,7 +10,7 @@ import string
 import pandas as pd
 
 from random import choice
-from datetime import datetime
+from datetime import datetime,timedelta
 from pathlib import Path
 
 from django.db import models
@@ -24,6 +24,24 @@ from game_shop.models import Cart, Customer, LineItem, Order, Game
 def GenPassword(length=8, charset=string.ascii_letters + string.digits):
     password = ''.join([choice(charset) for i in range(length)])
     return password
+
+
+def get_randate(last=datetime.now().date()):
+    rand_year = datetime.now().year
+    rand_month = datetime.now().month + random.randint(-1, 1)
+    rand_day = random.randint(1, 31)
+    print(rand_year, rand_month, rand_day)
+    rand_date = datetime.now().date()
+    try:
+        rand_date = datetime(year=rand_year, month=rand_month, day=rand_day).date()
+    except ValueError:
+        get_randate()
+
+    if (datetime.now().date()-rand_date).days < 0 or (datetime.now().date()-rand_date).days > 14 or rand_date == last:
+        return get_randate()
+    else:
+        print((datetime.now().date() - rand_date).days)
+        return rand_date
 
 
 class Command(BaseCommand):
@@ -85,7 +103,7 @@ class Command(BaseCommand):
             random_id = random.randint(1, len(products))
             cart = Cart.objects.create(
                 item=products[random_id],
-                quantity=random.randrange(1, 99),
+                quantity=random.randint(1, 9),
             )
             cart.save()
         print("Cart ready")
@@ -93,9 +111,10 @@ class Command(BaseCommand):
         # create orders from customers
         customers = Customer.objects.all()
         for customer in customers:
-            for i in range(random.randint(1, 5)):
+            for i in range(random.randint(5, 50)):
                 order = Order.objects.create(
                     customer=customer,
+                    created_date=get_randate()
                 )
                 order.save()
         print("Order.customers ready")
@@ -114,3 +133,13 @@ class Command(BaseCommand):
                 line_item.save()
 
         print("tables successfully loaded")
+
+        super_user = User.objects.create_user(
+            username='superuser',
+            first_name='super',
+            last_name='user',
+            password='superuser',
+            email='superuser@example.com',
+            is_staff=True,
+            is_superuser=True,)
+        print(super_user)

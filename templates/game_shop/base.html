@@ -14,18 +14,18 @@
             {% if user.is_staff %}
                 <a href = "{% url 'dashboard' %}">Dashboard</a> |
                 <a href = "{% url 'product_list' %}">Products</a> |
-                <a href = "{% url 'cart' %}">cart</a>
+                <a href = "{% url 'carts' %}">Carts</a> |
                 <a href = "{% url 'customer_list' %}">Customers</a> |
                 <a href = "{% url 'order_list' %}">Orders</a>
 
             {% else %}
                 <a href = "{% url 'product_list' %}">Products</a> |
                 <a href = "{% url 'order_list' %}">Orders</a> |
-                <a href = "{% url 'carts' %}">Cart</a>
+                <a href = "{% url 'carts' %}">Carts</a>
 
             {% endif %}
         </div>
-        <div style=";width:100px;height:100px;display:inline-block;float: right ">
+        <div style=";width:auto;height:auto;display:inline-block;float: right ">
             {% if user.is_authenticated %}
                 Hello {{ user.username }}
                 <a href = "{% url 'logout' %}">Log Out</a>
