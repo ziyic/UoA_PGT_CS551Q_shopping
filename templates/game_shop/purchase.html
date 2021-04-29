@@ -1,0 +1,29 @@
+{#TODO: complate this page#}
+
+{% extends 'game_shop/base.html' %}
+{% block content %}
+    <h1>Game Shop: Your Order</h1>
+
+<h2>You have these in your basket:</h2>
+  {% for product in products %}
+
+<p>You put {{product.quantity }} of our <b> {{ product.name }} </b> which costs {{ product.price }} in your basket.</p>
+
+   {% endfor %}
+ <p>The total for all of this fun is: {{ total}}</p>
+   <div>
+       <form action="{% url 'payment' %}" method="post">
+           {% csrf_token %}
+           <p>Buy one for yourself</p>
+           <label for="first_name"></label>
+           <input type='text' id="first_name" name='first_name' value="{{user.first_name}}" disabled>
+           <label for="last_name"></label>
+           <input type='text' id='last_name' name='last_name' value="{{user.last_name}}" disabled><br>
+           <label for="payment"></label>
+           <input type='text' id="payment" name='payment' value=" Add Card Type:">
+           <label for="total"></label>
+           <input type="number" id="total" name="total" value="Total Payment:">
+       <input type="submit" value="Payment">
+       </form>
+   </div>
+ {% endblock %}

@@ -1,0 +1,74 @@
+{#TODO: complate this page#}
+{% extends 'game_shop/base.html' %}
+{% block content %}
+    <h1 style="text-align:center;">Game Shop: Order Details</h1>
+    <div style="margin: auto">
+    <table style="border: thin solid black;align-self: center;margin: auto;width: auto;border-collapse: separate;border-spacing: 1em;">
+        <tr>
+            <td>
+                <p>Order:#{{ order.id }} </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="border: thin solid black;align-self: center;margin: auto;width: auto;border-collapse: separate;border-spacing: 10px;">
+                     <tr>
+                        <th>Username:</th>
+                        <td>{{ customer.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>e-mail:</th>
+                        <td>{{ customer.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ship to:</th>
+                        <td>{{ customer.customer.address }}</td>
+                    </tr>
+                    <tr>
+                        <th>Created at:</th>
+                        <td>{{ order.created_date }}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="border: thin solid black;align-self: center;margin:auto;width: auto;border-collapse: separate;border-spacing: 10px;">
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                    </tr>
+                    {% for line in line_items %}
+                    <tr>
+                        <td>{{ line.product.name }}</td>
+                        <td>{{ line.quantity }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </tr>
+    </table>
+{#    <p>Order:#order.id </p>#}
+{#    <table style="border: thin solid black;align-self: center;margin: auto;width: auto;border-collapse: separate;border-spacing: 10px;">#}
+{#        <tr>#}
+{#            <th>Username</th>#}
+{#            <td>{{ customer.username }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <th>e - mail</th>#}
+{#            <td>{{ customer.email }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <th>Ship to:</th>#}
+{#            <td>{{ customer.customer.address }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <th>Created at:</th>#}
+{#            <td>{{ order.created_date }}</td>#}
+{#        </tr>#}
+{#    </table>#}
+
+
+    </div>
+
+{% endblock %}

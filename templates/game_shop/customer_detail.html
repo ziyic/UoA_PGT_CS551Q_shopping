@@ -1,0 +1,33 @@
+{% extends 'game_shop/base.html' %}
+{% block content %}
+    <h1 style="text-align:center;">Game Shop: Customer Details</h1>
+    <div>
+        <h2 style="text-align:center;">Customer:</h2>
+        <table style="border: thin solid black;align-self: center;margin: auto;width: auto;border-collapse: separate;border-spacing: 10px;">
+            <tr>
+                <th>First name</th>
+                <td>{{ customer.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last name</th>
+                <td>{{ customer.last_name }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ customer.username }}</td>
+            </tr>
+            <tr>
+                <th>E-Mail</th>
+                <td>{{ customer.email }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ customer.customer.address }}</td>
+            </tr>
+        </table>
+    </div>
+
+
+{% endblock %}
+
+{#TODO: complate this page#}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Shop</title>
+</head>
+<body>
+    <header style="padding: 2%;">
+        <div id="left-navbar" style="width:auto;height:auto;display:inline-block;float: left">
+            {% if request.get_full_path != '/' %}
+                <a href = "{% url 'index' %}">Home</a> |
+            {% endif %}
+
+            {% if user.is_staff %}
+                <a href = "{% url 'dashboard' %}">Dashboard</a> |
+                <a href = "{% url 'product_list' %}">Products</a> |
+                <a href = "{% url 'carts' %}">Carts</a> |
+                <a href = "{% url 'customer_list' %}">Customers</a> |
+                <a href = "{% url 'order_list' %}">Orders</a>
+
+            {% else %}
+                <a href = "{% url 'product_list' %}">Products</a> |
+                <a href = "{% url 'order_list' %}">Orders</a> |
+                <a href = "{% url 'carts' %}">Carts</a>
+
+            {% endif %}
+        </div>
+        <div style=";width:auto;height:auto;display:inline-block;float: right ">
+            {% if user.is_authenticated %}
+                Hello {{ user.username }}
+                <a href = "{% url 'logout' %}">Log Out</a>
+
+            {% else %}
+                <a href = "{% url 'login' %}">Log In</a>
+
+            {% endif %}
+        </div>
+    </header>
+
+    <div id="body" style="padding-bottom: 5%">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p style="text-align:center;">
+            © Ziyi Cao - University of Aberdeen 2021
+        </p>
+    </footer>
+</body>
+</html>

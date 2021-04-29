@@ -1,0 +1,19 @@
+
+{#TODO: complate this page#}
+
+  {% extends 'game_shop/base.html' %}
+  {% block content %}
+    <h1 style="text-align:center;">Customer List</h1>
+    <table style="border: thin solid black;align-self: center;margin: auto;width: auto;border-collapse: separate;border-spacing: 10px;">
+        <tr>
+            <th>customer</th>
+            <th>email</th>
+        </tr>
+        {% for customer in customers %}
+            <tr>
+                <td><a href="{% url 'customer_detail' customer_id=customer.pk %}"> {{ customer.username }} </a></td>
+                <td>{{ customer.email }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

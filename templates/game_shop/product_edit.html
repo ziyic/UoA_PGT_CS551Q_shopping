@@ -1,0 +1,13 @@
+{#TODO: complate this page#}
+
+{% extends 'game_shop/base.html' %}
+{% block content %}
+    <h1>Game Shop: Product Edit</h1>
+    <div>
+        <p>Product:</p>
+    <form method="POST"> {% csrf_token %}
+      {{ form.as_p}}
+      <button type="submit" name="submit">Save</button>
+    </form>
+    </div>
+{% endblock %}
