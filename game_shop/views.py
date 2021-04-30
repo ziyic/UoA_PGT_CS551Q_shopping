@@ -121,7 +121,7 @@ def order_detail(request, order_id):
 def payment(request):
     games = get_cart(request)
     user = request.user
-    order = Order.objects.create(customer=user.customer)
+    order = Order.objects.create(customer=user.customer, created_date=datetime.date.today())
     order.refresh_from_db()
     for game in games:
         product_item = get_object_or_404(Game, id=game.item_id)
