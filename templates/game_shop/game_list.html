@@ -19,7 +19,7 @@
             {% endif %}
         </tr>
         {% for game in games %}
-        <tr>
+        <tr id="game_item">
             <td><a href="{% url 'product_detail' id=game.id %}">{{game.name }}</a></td>
             <td>{{ game.average_playtime }}</td>
             <td>{{ game.positive_ratings }}</td>

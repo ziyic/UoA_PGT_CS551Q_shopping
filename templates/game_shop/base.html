@@ -27,8 +27,8 @@
         </div>
         <div style=";width:auto;height:auto;display:inline-block;float: right ">
             {% if user.is_authenticated %}
-                Hello {{ user.username }}
-                <a href = "{% url 'logout' %}">Log Out</a>
+                <p id="greeting_info">Hello {{ user.username }}</p>
+                <a href = "{% url 'logout' %}" id="Logout">Log Out</a>
 
             {% else %}
                 <a href = "{% url 'login' %}">Log In</a>

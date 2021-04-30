@@ -10,7 +10,7 @@ import string
 import pandas as pd
 
 from random import choice
-from datetime import datetime,timedelta
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from django.db import models
@@ -37,7 +37,8 @@ def get_randate(last=datetime.now().date()):
     except ValueError:
         get_randate()
 
-    if (datetime.now().date()-rand_date).days < 0 or (datetime.now().date()-rand_date).days > 14 or rand_date == last:
+    if (datetime.now().date() - rand_date).days < 0 or (
+            datetime.now().date() - rand_date).days > 14 or rand_date == last:
         return get_randate()
     else:
         print((datetime.now().date() - rand_date).days)
@@ -95,7 +96,7 @@ class Command(BaseCommand):
                 price=game_data.iloc[i]['price'],
             )
             game.save()
-            print(game)
+            # print(game)
 
         # create some carts
         products = list(Game.objects.all())
@@ -141,5 +142,5 @@ class Command(BaseCommand):
             password='superuser',
             email='superuser@example.com',
             is_staff=True,
-            is_superuser=True,)
+            is_superuser=True, )
         print(super_user)

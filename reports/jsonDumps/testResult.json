@@ -1,0 +1,343 @@
+[
+{
+  "elements": [
+    {
+      "keyword": "Scenario",
+      "location": "features/auth.feature:3",
+      "name": "user login",
+      "status": "passed",
+      "steps": [
+        {
+          "keyword": "Given",
+          "location": "features/auth.feature:4",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/auth.py:13"
+          },
+          "name": ": when we at user login page",
+          "result": {
+            "duration": 0.24001479148864746,
+            "status": "passed"
+          },
+          "step_type": "given"
+        },
+        {
+          "keyword": "When",
+          "location": "features/auth.feature:5",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/auth.py:22"
+          },
+          "name": ": we input username and password",
+          "result": {
+            "duration": 0.3490469455718994,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/auth.feature:6",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/auth.py:50"
+          },
+          "name": ": we can see application has been logged in",
+          "result": {
+            "duration": 0.009521007537841797,
+            "status": "passed"
+          },
+          "step_type": "then"
+        }
+      ],
+      "tags": [],
+      "type": "scenario"
+    },
+    {
+      "keyword": "Scenario",
+      "location": "features/auth.feature:8",
+      "name": "superuser login",
+      "status": "passed",
+      "steps": [
+        {
+          "keyword": "Given",
+          "location": "features/auth.feature:9",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/auth.py:13"
+          },
+          "name": ": when we at user login page",
+          "result": {
+            "duration": 0.032701969146728516,
+            "status": "passed"
+          },
+          "step_type": "given"
+        },
+        {
+          "keyword": "When",
+          "location": "features/auth.feature:10",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/auth.py:36"
+          },
+          "name": ": we input a superuser username and password",
+          "result": {
+            "duration": 0.2897920608520508,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/auth.feature:11",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/auth.py:58"
+          },
+          "name": ": we can see application has been logged in with a superuser",
+          "result": {
+            "duration": 0.0052471160888671875,
+            "status": "passed"
+          },
+          "step_type": "then"
+        }
+      ],
+      "tags": [],
+      "type": "scenario"
+    },
+    {
+      "keyword": "Scenario",
+      "location": "features/auth.feature:14",
+      "name": "user logout",
+      "status": "passed",
+      "steps": [
+        {
+          "keyword": "Given",
+          "location": "features/auth.feature:15",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/auth.py:66"
+          },
+          "name": ": when we logged in with a user",
+          "result": {
+            "duration": 0.006684780120849609,
+            "status": "passed"
+          },
+          "step_type": "given"
+        },
+        {
+          "keyword": "When",
+          "location": "features/auth.feature:16",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/auth.py:74"
+          },
+          "name": ": we click on logout link",
+          "result": {
+            "duration": 0.05547809600830078,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/auth.feature:17",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/auth.py:82"
+          },
+          "name": ": we can see application has been logged out",
+          "result": {
+            "duration": 0.0095367431640625,
+            "status": "passed"
+          },
+          "step_type": "then"
+        }
+      ],
+      "tags": [],
+      "type": "scenario"
+    }
+  ],
+  "keyword": "Feature",
+  "location": "features/auth.feature:1",
+  "name": "Authority",
+  "status": "passed",
+  "tags": []
+},
+
+{
+  "elements": [
+    {
+      "keyword": "Scenario",
+      "location": "features/cart.feature:4",
+      "name": "Add game to Cart",
+      "status": "passed",
+      "steps": [
+        {
+          "keyword": "Given",
+          "location": "features/cart.feature:6",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/cart.py:11"
+          },
+          "name": ": we have logged in with a user and we are at game details page",
+          "result": {
+            "duration": 0.3294529914855957,
+            "status": "passed"
+          },
+          "step_type": "given"
+        },
+        {
+          "keyword": "When",
+          "location": "features/cart.feature:8",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/cart.py:25"
+          },
+          "name": ": we set a quantity and click on Purchase link",
+          "result": {
+            "duration": 0.12610888481140137,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/cart.feature:10",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/cart.py:35"
+          },
+          "name": ": game has been add to the cart",
+          "result": {
+            "duration": 0.028153181076049805,
+            "status": "passed"
+          },
+          "step_type": "then"
+        }
+      ],
+      "tags": [],
+      "type": "scenario"
+    }
+  ],
+  "keyword": "Feature",
+  "location": "features/cart.feature:2",
+  "name": "Cart",
+  "status": "passed",
+  "tags": []
+},
+
+{
+  "elements": [
+    {
+      "keyword": "Scenario",
+      "location": "features/games.feature:3",
+      "name": "search a game",
+      "status": "passed",
+      "steps": [
+        {
+          "keyword": "Given",
+          "location": "features/games.feature:4",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/games.py:12"
+          },
+          "name": "we want to find a game",
+          "result": {
+            "duration": 0.030651092529296875,
+            "status": "passed"
+          },
+          "step_type": "given"
+        },
+        {
+          "keyword": "When",
+          "location": "features/games.feature:5",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/games.py:21"
+          },
+          "name": "we fill in the name of the into search bar",
+          "result": {
+            "duration": 0.13433027267456055,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/games.feature:6",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/games.py:31"
+          },
+          "name": "show the search result",
+          "result": {
+            "duration": 0.007837295532226562,
+            "status": "passed"
+          },
+          "step_type": "then"
+        }
+      ],
+      "tags": [],
+      "type": "scenario"
+    },
+    {
+      "keyword": "Scenario",
+      "location": "features/games.feature:8",
+      "name": "check game details",
+      "status": "passed",
+      "steps": [
+        {
+          "keyword": "Given",
+          "location": "features/games.feature:9",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/games.py:39"
+          },
+          "name": "we are at a game list page",
+          "result": {
+            "duration": 0.036794185638427734,
+            "status": "passed"
+          },
+          "step_type": "given"
+        },
+        {
+          "keyword": "When",
+          "location": "features/games.feature:10",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/games.py:47"
+          },
+          "name": "we click on one of the game name",
+          "result": {
+            "duration": 0.062413930892944336,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/games.feature:11",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/games.py:55"
+          },
+          "name": "we will be redirect to game detail",
+          "result": {
+            "duration": 0.00287628173828125,
+            "status": "passed"
+          },
+          "step_type": "then"
+        }
+      ],
+      "tags": [],
+      "type": "scenario"
+    }
+  ],
+  "keyword": "Feature",
+  "location": "features/games.feature:1",
+  "name": "searching",
+  "status": "passed",
+  "tags": []
+}
+]

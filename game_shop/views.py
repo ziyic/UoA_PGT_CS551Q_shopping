@@ -31,8 +31,8 @@ def product_list(request):
     paginator = Paginator(games, 25)
     page_num = request.GET.get('page')
     page = paginator.get_page(page_num)
-    cart = request.session.get('cart', [])
-    request.session['cart'] = cart
+    cart = request.session.get('Cart', [])
+    request.session['Cart'] = cart
     deleted = request.session.get('deleted', 'empty')
     request.session['deleted'] = 'hello'
 
@@ -40,7 +40,7 @@ def product_list(request):
 
 
 def get_cart(request):
-    cart = request.session.get('cart', [])
+    cart = request.session.get('Cart', [])
     products = []
     for item in cart:
         print(item[0])
@@ -130,7 +130,7 @@ def payment(request):
         line_item = LineItem.objects.create(quantity=game.quantity, product=product_item,
                                             cart=cart, order=order)
 
-    request.session['cart'].clear()
+    request.session['Cart'].clear()
     request.session['deleted'] = 'thanks for your purchase'
     return redirect('product_list')
 
@@ -139,9 +139,12 @@ def product_buy(request):
     if request.method == "POST":
         temp_id = int(request.POST.get('id', ''))
         quantity = int(request.POST.get('quantity', ''))
-        cart = request.session['cart']
+        if not request.session.get('Cart'):
+            request.session['Cart'] = []
+        cart = request.session['Cart']
         cart.append([temp_id, quantity])
-        request.session['cart'] = cart
+        request.session['Cart'] = cart
+        print(cart)
     return redirect('product_list')
 
 
